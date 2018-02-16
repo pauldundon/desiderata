@@ -11,7 +11,8 @@ Public Class DocumentRepository
     Protected Function IsSchemaDocument(localPath As String) As Boolean
         Return Schemas.IsSchemaDocument(localPath)
     End Function
-    Protected Function FindCollection(collectionPath As String, create As Boolean) As Collection
+    Protected Function FindCollection(collectionPath As String, forDocument As String,
+                                      create As Boolean) As Collection
         Dim coll As Collection = (From item In ctx.Collections
                                   Where item.Path = collectionPath
                                   Select item).SingleOrDefault
@@ -19,8 +20,10 @@ Public Class DocumentRepository
         If coll Is Nothing And create Then
             coll = New Collection
             coll.Path = collectionPath
+            coll.DefaultSchemaID = Schemas.InferSchema(forDocument)
             ctx.Collections.InsertOnSubmit(coll)
             ctx.SubmitChanges()
+
         End If
 
         Return coll
@@ -49,13 +52,14 @@ Public Class DocumentRepository
                                    collectionPath As String) As String
 
 
-        Dim coll As Collection = FindCollection(collectionPath, True)
+        Dim coll As Collection = FindCollection(collectionPath, content, True)
 
         Dim post As New Desideratum
         post.CollectionID = coll.CollectionID
         post.Content = content
         post.MediaType = mediaType
         post.Path = ""
+        post.SchemaID = coll.DefaultSchemaID
         ctx.Desideratums.InsertOnSubmit(post)
 
         ctx.SubmitChanges()
@@ -74,13 +78,14 @@ Public Class DocumentRepository
 
         Dim collectionPath As String = GetDirectoryName(documentPath)
 
-        Dim coll As Collection = FindCollection(collectionPath, True)
+        Dim coll As Collection = FindCollection(collectionPath, content, True)
 
         Dim post As New Desideratum
         post.CollectionID = coll.CollectionID
         post.Content = content
         post.MediaType = mediaType
         post.Path = documentPath
+        post.SchemaID = coll.DefaultSchemaID
         ctx.Desideratums.InsertOnSubmit(post)
 
         ctx.SubmitChanges()
@@ -100,7 +105,7 @@ Public Class DocumentRepository
 
         Dim collectionPath As String = GetDirectoryName(documentPath)
 
-        Dim coll As Collection = FindCollection(collectionPath, True)
+        Dim coll As Collection = FindCollection(collectionPath, content, True)
 
         Dim put As Desideratum = (From item In ctx.Desideratums
                                   Where item.Path = documentPath
@@ -134,7 +139,7 @@ Public Class DocumentRepository
         End If
     End Function
     Public Function ListDocuments(collectionPath As String) As IEnumerable(Of Desideratum)
-        Dim coll As Collection = FindCollection(collectionPath, False)
+        Dim coll As Collection = FindCollection(collectionPath, Nothing, False)
 
         If coll Is Nothing Then
             Throw New DocumentNotFoundException
@@ -160,8 +165,12 @@ Public Class DocumentRepository
     End Function
 
     Public Function IsCollectionPath(path As String) As Boolean
-        Return Not FindCollection(path, False) Is Nothing
+        Return Not FindCollection(path, Nothing, False) Is Nothing
     End Function
+
+
+    ' If we create a document we make sure it has a schema
+
 End Class
 
 Public Class DocumentNotFoundException

@@ -1,6 +1,7 @@
 ﻿Public Class SchemaRepository
     Protected Property ctx As New DesiderataDataContext
     Public Property PathRoot As String
+    Protected Property Generator As New SchemaGenerator
 
     Public Sub New(pathRoot As String)
         Me.PathRoot = pathRoot
@@ -84,6 +85,24 @@
                               Where item.Path = documentPath
                               Select item.DesideratumID).SingleOrDefault
         Return doc <> 0
+
+    End Function
+
+    Public Function InferSchema(forDocument As String) As Integer
+        Dim inferred As String = Generator.GetSchema(forDocument)
+        Dim ctx As New DesiderataDataContext
+
+        Dim s As New Schema With {
+            .Content = inferred,
+            .Path = "",
+            .IsInferred = True}
+
+        ctx.Schemas.InsertOnSubmit(s)
+        ctx.SubmitChanges()
+        s.Path = PathRoot & "/" & s.SchemaID
+        ctx.SubmitChanges()
+
+        Return s.SchemaID
 
     End Function
 End Class

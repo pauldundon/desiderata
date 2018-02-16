@@ -39,7 +39,7 @@ Imports Raffles
     <TestMethod()> Public Sub VerifySchema()
         Dim pl As New Ajax.Payload From {{"Hello", "World"}}
         Dim id As String = Ajax.MakeApiRequest("/Hellos", Ajax.Methods.POST, pl)
-        Dim schemaQuery As String = String.Format("/schema?id={0}", WebUtility.UrlEncode(id))
-        Dim schema As JObject = Ajax.MakeApiRequest(schemaQuery, Ajax.Methods.GET)
+
+        Dim schema As JObject = Ajax.MakeApiRequest("/dsschema/1", Ajax.Methods.GET)
     End Sub
 End Class
