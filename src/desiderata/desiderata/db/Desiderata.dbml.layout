@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Desiderata">
+  <DataContextMoniker Name="/DesiderataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="17f99d9c-b2ae-4eb9-b232-802aed011fe5" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DesiderataDataContext/Collection" />
+      <nestedChildShapes>
+        <elementListCompartment Id="227272b5-b7c2-4b3a-8321-921ff16651c3" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bba08fc9-c4ce-4f3f-8a38-00d99181ca7e" absoluteBounds="3.75, 0.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DesiderataDataContext/Desideratum" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26a9d124-e0c2-46be-b71c-5fe9306b69ba" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9ab88ecc-a36a-405a-b307-f5d0b6ebdfaf" absoluteBounds="0.75, 3.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DesiderataDataContext/Schema" />
+      <nestedChildShapes>
+        <elementListCompartment Id="533d6dce-1fd2-4a37-81fa-959db4b44c29" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

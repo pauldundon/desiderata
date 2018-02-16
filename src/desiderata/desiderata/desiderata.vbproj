@@ -47,8 +47,12 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -68,6 +72,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="db\Desiderata.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Desiderata.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="db\Repository.vb" />
+    <Compile Include="db\SchemaRepository.vb" />
+    <Compile Include="DELETE\DeleteRequestHandler.vb" />
+    <Compile Include="GET\GetRequestHandler.vb" />
+    <Compile Include="GET\GetSchemaRequestHandler.vb" />
+    <Compile Include="GET\LinkResult.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -84,16 +99,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="POST\PostRequestHandler.vb" />
+    <Compile Include="PUT\PutRequestHandler.vb" />
+    <Compile Include="RequestHandler.vb" />
+    <Compile Include="typing\HelloDetector.vb" />
+    <Compile Include="typing\TypeDetector.vb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="db\Desiderata.dbml.layout">
+      <DependentUpon>Desiderata.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="schema\object.json" />
+    <None Include="schema\hello.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="db\Desiderata.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Desiderata.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -105,5 +136,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
