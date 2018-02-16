@@ -3,7 +3,9 @@
 Module Module1
 
     Sub Main()
-
+        With New Repository
+            .Reset()
+        End With
         SimpleListenerExample({"http://localhost:904/"})
 
     End Sub

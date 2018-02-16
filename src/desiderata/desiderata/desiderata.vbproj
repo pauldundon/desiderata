@@ -47,6 +47,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hoshin.Extensions">
+      <HintPath>..\..\..\..\..\omnisis\build\Working\Main\POPS\CODALib\pub\Hoshin.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
       <DependentUpon>Desiderata.dbml</DependentUpon>
     </Compile>
     <Compile Include="db\Repository.vb" />
+    <Compile Include="db\SchemaGenerator.vb" />
     <Compile Include="db\SchemaRepository.vb" />
     <Compile Include="DELETE\DeleteRequestHandler.vb" />
     <Compile Include="GET\GetRequestHandler.vb" />

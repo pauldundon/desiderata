@@ -15,8 +15,7 @@ Public Class PutRequestHandler
         If Repository.DocumentExists(entityPath) Then
             Repository.UpdateDocument(RequestContent, RequestMediaType, entityPath)
         Else
-            entityPath = Repository.CreateDocument(RequestContent, RequestMediaType,
-                                                  Path.GetDirectoryName(entityPath),
+            entityPath = Repository.CreateNamedDocument(RequestContent, RequestMediaType,
                                                    entityPath)
         End If
 

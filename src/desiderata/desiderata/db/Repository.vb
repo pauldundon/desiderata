@@ -1,10 +1,13 @@
 ﻿Imports System.IO
+Imports Hoshin.Extensions.Collections
 
 Public Class DocumentRepository
     Protected Property ctx As New DesiderataDataContext
     Protected Property Schemas As New SchemaRepository("/dsschema")
 
-
+    Protected Function GetDirectoryName(path As String) As String
+        Return String.Join("/", path.Split("/").TakeAllBut(1))
+    End Function
     Protected Function IsSchemaDocument(localPath As String) As Boolean
         Return Schemas.IsSchemaDocument(localPath)
     End Function
@@ -43,12 +46,33 @@ Public Class DocumentRepository
     End Sub
     Public Function CreateDocument(content As String,
                                    mediaType As String,
-                                   collectionPath As String,
-                                   Optional documentPath As String = "") As String
+                                   collectionPath As String) As String
 
-        If documentPath <> "" And Not documentPath.StartsWith(collectionPath) Then
-            Throw New ArgumentException("documentPath must be within collectionPath")
-        End If
+
+        Dim coll As Collection = FindCollection(collectionPath, True)
+
+        Dim post As New Desideratum
+        post.CollectionID = coll.CollectionID
+        post.Content = content
+        post.MediaType = mediaType
+        post.Path = ""
+        ctx.Desideratums.InsertOnSubmit(post)
+
+        ctx.SubmitChanges()
+
+        post.Path = collectionPath & "/" & post.DesideratumID
+        ctx.SubmitChanges()
+
+
+        Return post.Path
+
+    End Function
+
+    Public Function CreateNamedDocument(content As String,
+                                   mediaType As String,
+                                   documentPath As String) As String
+
+        Dim collectionPath As String = GetDirectoryName(documentPath)
 
         Dim coll As Collection = FindCollection(collectionPath, True)
 
@@ -60,12 +84,6 @@ Public Class DocumentRepository
         ctx.Desideratums.InsertOnSubmit(post)
 
         ctx.SubmitChanges()
-
-        If documentPath = "" Then
-            post.Path = collectionPath & "/" & post.DesideratumID
-            ctx.SubmitChanges()
-        End If
-
 
         Return post.Path
 
@@ -80,7 +98,7 @@ Public Class DocumentRepository
             Exit Sub
         End If
 
-        Dim collectionPath As String = Path.GetDirectoryName(documentPath)
+        Dim collectionPath As String = GetDirectoryName(documentPath)
 
         Dim coll As Collection = FindCollection(collectionPath, True)
 
@@ -153,4 +171,11 @@ End Class
 
 Public Class Repository
     Inherits DocumentRepository
+
+    Public Sub Reset()
+        Dim ctx As New DesiderataDataContext
+        ctx.ExecuteCommand("DELETE FROM [Schema]")
+        ctx.ExecuteCommand("DELETE FROM Collection")
+        ctx.ExecuteCommand("DELETE FROM Desideratum")
+    End Sub
 End Class
