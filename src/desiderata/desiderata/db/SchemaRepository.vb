@@ -105,4 +105,19 @@
         Return s.SchemaID
 
     End Function
+
+    Public Function GetSchemaPath(forDocumentPath As String) As String
+        Dim id As Integer = (From item In ctx.Desideratums
+                             Where item.Path = forDocumentPath
+                             Select item.SchemaID).SingleOrDefault
+
+        If id = 0 Then
+            Throw New DocumentNotFoundException
+        Else
+            Dim schemaPath As String = (From item In ctx.Schemas
+                                        Where item.SchemaID = id
+                                        Select item.Path).SingleOrDefault
+            Return schemaPath
+        End If
+    End Function
 End Class

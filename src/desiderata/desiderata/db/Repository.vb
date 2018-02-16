@@ -169,7 +169,9 @@ Public Class DocumentRepository
     End Function
 
 
-    ' If we create a document we make sure it has a schema
+    Public Function GetSchemaPath(forDocumentPath As String) As String
+        Return Schemas.GetSchemaPath(forDocumentPath)
+    End Function
 
 End Class
 

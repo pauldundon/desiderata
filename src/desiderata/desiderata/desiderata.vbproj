@@ -85,7 +85,6 @@
     <Compile Include="db\SchemaRepository.vb" />
     <Compile Include="DELETE\DeleteRequestHandler.vb" />
     <Compile Include="GET\GetRequestHandler.vb" />
-    <Compile Include="GET\GetSchemaRequestHandler.vb" />
     <Compile Include="GET\LinkResult.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

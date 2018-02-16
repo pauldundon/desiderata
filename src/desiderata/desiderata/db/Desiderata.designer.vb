@@ -386,7 +386,7 @@ Partial Public Class Schema
 	
 	Private _Content As String
 	
-	Private _IsInferred As Byte
+	Private _IsInferred As Boolean
 	
 	Private _Path As String
 	
@@ -405,7 +405,7 @@ Partial Public Class Schema
     End Sub
     Partial Private Sub OnContentChanged()
     End Sub
-    Partial Private Sub OnIsInferredChanging(value As Byte)
+    Partial Private Sub OnIsInferredChanging(value As Boolean)
     End Sub
     Partial Private Sub OnIsInferredChanged()
     End Sub
@@ -453,8 +453,8 @@ Partial Public Class Schema
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsInferred", DbType:="TinyInt NOT NULL")>  _
-	Public Property IsInferred() As Byte
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsInferred", DbType:="Bit NOT NULL")>  _
+	Public Property IsInferred() As Boolean
 		Get
 			Return Me._IsInferred
 		End Get
