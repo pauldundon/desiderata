@@ -75,6 +75,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="db\CollectionDiscriminator.vb" />
     <Compile Include="db\Desiderata.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

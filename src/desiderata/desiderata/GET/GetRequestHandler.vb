@@ -8,19 +8,11 @@ Public Class GetRequestHandler
     End Sub
     Protected Overrides Sub ProcessRequest()
 
-        'If path.ToLower.StartsWith("/dsschema") Then
-        '    Dim handler As New GetSchemaRequestHandler(Context)
-        '    handler.ProcessRequest()
-        '    Exit Sub
-        'End If
-
         If Not Repository.IsCollectionPath(LocalPath) Then
             GetEntity()
         Else
             GetCollection()
         End If
-
-
 
     End Sub
 
@@ -45,6 +37,12 @@ Public Class GetRequestHandler
         For Each des As Desideratum In Repository.ListDocuments(LocalPath)
             links.Add(New LinkResult With {.href = URLFromPath(des.Path)})
         Next
+        'This is a placeholder; see CollectionDiscriminator for more info
+        Dim ruleUrl As String = URLFromPath(Repository.GetSchemaPath(Repository.GetDiscriminatorPath(LocalPath)))
+        Dim link As String = String.Format("<{0}>; REL=discriminatedBy", ruleUrl)
+        Context.Response.AddHeader("Link", link)
+
+
         Dim dict As New Dictionary(Of String, Object) From {{"links", links}}
         SetJSONResult(dict)
 

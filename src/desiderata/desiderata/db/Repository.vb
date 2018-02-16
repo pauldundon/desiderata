@@ -173,6 +173,10 @@ Public Class DocumentRepository
         Return Schemas.GetSchemaPath(forDocumentPath)
     End Function
 
+    Public Function GetDiscriminatorPath(forCollectionPath As String) As String
+        'This is a placeholder; see CollectionDiscriminator for more info
+        Return String.Format("dsschema/dsrules/1")
+    End Function
 End Class
 
 Public Class DocumentNotFoundException
