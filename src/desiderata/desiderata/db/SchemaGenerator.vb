@@ -1,4 +1,4 @@
-﻿Imports System.Text
+﻿
 Imports Newtonsoft.Json.Linq
 
 Public Class SchemaGenerator
@@ -25,7 +25,7 @@ Public Class SchemaGenerator
     End Enum
     Public Function GetSchema(forDocument As String) As String
         Dim obj As JObject = JObject.Parse(forDocument)
-        Return GetSchema(obj).ToString
+        Return GetSchema(CType(obj, JToken)).ToString
     End Function
     Protected Function GetSchema(forArray As JArray) As JObject
 
@@ -64,7 +64,7 @@ Public Class SchemaGenerator
 
     Protected Function GetSchema(forProperty As JProperty) As JObject
         Dim name As String = forProperty.Name
-        Dim value As JToken = forProperty(name)
+        Dim value As JToken = forProperty.Value
         Return GetSchema(value)
     End Function
 

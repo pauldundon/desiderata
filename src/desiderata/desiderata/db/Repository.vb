@@ -67,7 +67,7 @@ Public Class DocumentRepository
         post.Path = collectionPath & "/" & post.DesideratumID
         ctx.SubmitChanges()
 
-
+        OnDocumentUpdated(post)
         Return post.Path
 
     End Function
@@ -90,6 +90,7 @@ Public Class DocumentRepository
 
         ctx.SubmitChanges()
 
+        OnDocumentUpdated(post)
         Return post.Path
 
     End Function
@@ -117,6 +118,7 @@ Public Class DocumentRepository
             put.Content = content
             put.MediaType = mediaType
             ctx.SubmitChanges()
+            OnDocumentUpdated(put)
         End If
     End Sub
 
@@ -177,6 +179,16 @@ Public Class DocumentRepository
         'This is a placeholder; see CollectionDiscriminator for more info
         Return String.Format("dsschema/dsrules/1")
     End Function
+
+    Protected Sub OnDocumentUpdated(doc As Desideratum)
+        If Not Schemas.SchemaExists(doc.Path) Then
+            doc.SchemaID = Schemas.CreateSchema(Schemas.InferSchema(doc.Content), True)
+            ctx.SubmitChanges()
+        Else
+            Schemas.UpdateSchema(Schemas.InferSchema(doc.Content), doc.Path)
+        End If
+
+    End Sub
 End Class
 
 Public Class DocumentNotFoundException
