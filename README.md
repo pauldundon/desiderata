@@ -1,1 +1,3 @@
 Desiderata is a client-server framework for rapid iterative development of REST applications. It is currently in very early stages of development (it hasn’t even reached proof-of-concept at this point). It consists of a server, written in VB.NET and using MS-SQL Server, and a client written in ECMA Script. The first task in the development roadmap is to port the server to Node.js and mongo.db.
+
+The project wiki contains an overview of what the project sets out to accomplish.
