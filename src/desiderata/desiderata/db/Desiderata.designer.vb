@@ -386,7 +386,7 @@ Partial Public Class Schema
 	
 	Private _Content As String
 	
-	Private _IsInferred As Boolean
+	Private _InferenceMode As Byte
 	
 	Private _Path As String
 	
@@ -405,9 +405,9 @@ Partial Public Class Schema
     End Sub
     Partial Private Sub OnContentChanged()
     End Sub
-    Partial Private Sub OnIsInferredChanging(value As Boolean)
+    Partial Private Sub OnInferenceModeChanging(value As Byte)
     End Sub
-    Partial Private Sub OnIsInferredChanged()
+    Partial Private Sub OnInferenceModeChanged()
     End Sub
     Partial Private Sub OnPathChanging(value As String)
     End Sub
@@ -453,19 +453,19 @@ Partial Public Class Schema
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsInferred", DbType:="Bit NOT NULL")>  _
-	Public Property IsInferred() As Boolean
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InferenceMode", DbType:="TinyInt NOT NULL")>  _
+	Public Property InferenceMode() As Byte
 		Get
-			Return Me._IsInferred
+			Return Me._InferenceMode
 		End Get
 		Set
-			If ((Me._IsInferred = value)  _
+			If ((Me._InferenceMode = value)  _
 						= false) Then
-				Me.OnIsInferredChanging(value)
+				Me.OnInferenceModeChanging(value)
 				Me.SendPropertyChanging
-				Me._IsInferred = value
-				Me.SendPropertyChanged("IsInferred")
-				Me.OnIsInferredChanged
+				Me._InferenceMode = value
+				Me.SendPropertyChanged("InferenceMode")
+				Me.OnInferenceModeChanged
 			End If
 		End Set
 	End Property

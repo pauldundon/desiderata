@@ -6,12 +6,12 @@
     Public Sub New(pathRoot As String)
         Me.PathRoot = pathRoot
     End Sub
-    Public Function IsSchemaDocument(localPath As String) As Boolean
-        Return localPath.ToLower.StartsWith(PathRoot)
+    Public Function IsSchemaDocument(schemaPath As String) As Boolean
+        Return schemaPath.ToLower.StartsWith(PathRoot)
     End Function
-    Public Sub DeleteSchema(localPath As String)
+    Public Sub DeleteSchema(schemaPath As String)
         Dim result As Schema = (From item In ctx.Schemas
-                                Where item.Path = localPath
+                                Where item.Path = schemaPath
                                 Select item).SingleOrDefault
 
         If result Is Nothing Then
@@ -22,12 +22,12 @@
         End If
     End Sub
 
-    Public Function CreateSchema(content As String, isInferred As Boolean) As String
+    Public Function CreateSchema(content As String, inferenceMode As Integer) As String
 
         Dim post As New Schema
         post.Content = content
         post.Path = ""
-        post.IsInferred = isInferred
+        post.InferenceMode = inferenceMode
         ctx.Schemas.InsertOnSubmit(post)
 
         ctx.SubmitChanges()
@@ -39,12 +39,12 @@
         Return post.Path
 
     End Function
-    Public Function CreateSchema(content As String, isInferred As Boolean, name As String) As String
+    Public Function CreateSchema(content As String, inferenceMode As Integer, name As String) As String
 
         Dim post As New Schema
         post.Content = content
         post.Path = PathRoot & "/" & name
-        post.IsInferred = isInferred
+        post.InferenceMode = inferenceMode
         ctx.Schemas.InsertOnSubmit(post)
 
         ctx.SubmitChanges()
@@ -53,11 +53,11 @@
 
     End Function
     Public Sub UpdateSchema(content As String,
-                                documentPath As String)
+                                schemaPath As String)
 
 
         Dim put As Schema = (From item In ctx.Schemas
-                             Where item.Path = documentPath
+                             Where item.Path = schemaPath
                              Select item).SingleOrDefault
 
         If put Is Nothing Then
@@ -68,9 +68,9 @@
         End If
     End Sub
 
-    Public Function ReadSchema(documentPath As String) As Schema
+    Public Function ReadSchema(schemaPath As String) As Schema
         Dim doc As Schema = (From item In ctx.Schemas
-                             Where item.Path = documentPath
+                             Where item.Path = schemaPath
                              Select item).SingleOrDefault
 
         If Not doc Is Nothing Then
@@ -80,22 +80,22 @@
         End If
     End Function
 
-    Public Function SchemaExists(documentPath As String) As Boolean
+    Public Function SchemaExists(schemaPath As String) As Boolean
         Dim doc As Integer = (From item In ctx.Desideratums
-                              Where item.Path = documentPath
+                              Where item.Path = schemaPath
                               Select item.DesideratumID).SingleOrDefault
         Return doc <> 0
 
     End Function
 
-    Public Function InferSchema(forDocument As String) As Integer
-        Dim inferred As String = Generator.GetSchema(forDocument)
+    Public Function InferCollectionSchema(initialDocument As String) As Integer
+        Dim inferred As String = Generator.GetSchema(initialDocument)
         Dim ctx As New DesiderataDataContext
 
         Dim s As New Schema With {
             .Content = inferred,
             .Path = "",
-            .IsInferred = True}
+            .InferenceMode = 1}
 
         ctx.Schemas.InsertOnSubmit(s)
         ctx.SubmitChanges()
@@ -121,5 +121,16 @@
         End If
     End Function
 
+    Public Sub ReviseInferredSchema(forDocument As Desideratum)
+        Dim schemaContent As String = Generator.GetSchema(forDocument.Content)
 
+        Dim currentSchema As Schema = (From item In ctx.Schemas
+                                       Where item.SchemaID = forDocument.SchemaID
+                                       Select item).Single
+        currentSchema.Content = schemaContent
+
+        ctx.SubmitChanges()
+
+
+    End Sub
 End Class

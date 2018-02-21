@@ -20,7 +20,7 @@ Public Class DocumentRepository
         If coll Is Nothing And create Then
             coll = New Collection
             coll.Path = collectionPath
-            coll.DefaultSchemaID = Schemas.InferSchema(forDocument)
+            coll.DefaultSchemaID = Schemas.InferCollectionSchema(forDocument)
             ctx.Collections.InsertOnSubmit(coll)
             ctx.SubmitChanges()
 
@@ -181,12 +181,7 @@ Public Class DocumentRepository
     End Function
 
     Protected Sub OnDocumentUpdated(doc As Desideratum)
-        If Not Schemas.SchemaExists(doc.Path) Then
-            doc.SchemaID = Schemas.CreateSchema(Schemas.InferSchema(doc.Content), True)
-            ctx.SubmitChanges()
-        Else
-            Schemas.UpdateSchema(Schemas.InferSchema(doc.Content), doc.Path)
-        End If
+        Schemas.ReviseInferredSchema(doc)
 
     End Sub
 End Class

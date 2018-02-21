@@ -1,0 +1,15 @@
+﻿{
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "PrimaryContact": {
+      "type": "string"
+    },
+    "PrimaryPhone": {
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema"
+}

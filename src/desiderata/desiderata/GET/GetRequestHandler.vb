@@ -27,6 +27,14 @@ Public Class GetRequestHandler
             Dim schemaUrl As String = URLFromPath(Repository.GetSchemaPath(LocalPath))
             Dim link As String = String.Format("<{0}>; REL=describedBy", schemaUrl)
             Context.Response.AddHeader("Link", link)
+
+            ' There is a IANA-registered "type" relationship which we can leverage
+            ' to provide richer type information than that provided by JSON Schema
+            ' We haven't done this yet, but what follows is a placeholder so we
+            ' know where to do it. In reality we would not use schemaUrl but some
+            ' other url which provides more information
+            link = String.Format("<{0}>; REL=type", schemaUrl)
+            Context.Response.AddHeader("Link", link)
         End If
         SetStringResult(result.Content)
     End Sub

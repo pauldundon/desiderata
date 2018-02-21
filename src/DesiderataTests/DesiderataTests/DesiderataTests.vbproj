@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Delete.vb" />
+    <Compile Include="json\JSONOps.vb" />
     <Compile Include="Put.vb" />
     <Compile Include="Post.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -104,7 +105,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UnitTest1.vb" />
+    <Compile Include="Schema.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -116,6 +117,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="json\organisation2-schema.json" />
+    <None Include="json\organisation-schema.json" />
+    <None Include="json\organisation2.json" />
+    <None Include="json\organisation.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

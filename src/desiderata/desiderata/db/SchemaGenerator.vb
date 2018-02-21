@@ -24,8 +24,11 @@ Public Class SchemaGenerator
         AcceptAllChanges
     End Enum
     Public Function GetSchema(forDocument As String) As String
+
         Dim obj As JObject = JObject.Parse(forDocument)
-        Return GetSchema(CType(obj, JToken)).ToString
+        Dim schema As JObject = GetSchema(CType(obj, JToken))
+        schema("$schema") = "http://json-schema.org/draft-04/schema"
+        Return schema.ToString
     End Function
     Protected Function GetSchema(forArray As JArray) As JObject
 

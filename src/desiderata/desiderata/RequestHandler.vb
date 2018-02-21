@@ -16,6 +16,7 @@ Public MustInherit Class RequestHandler
     End Sub
     Sub PublicProcessRequest() Implements IRequestHandler.ProcessRequest
         Try
+            Context.Response.AddHeader("Access-Control-Allow-Origin", "*")
             ProcessRequest()
         Catch ex As DocumentNotFoundException
             Context.Response.StatusCode = 404

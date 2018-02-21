@@ -2,22 +2,22 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Desiderata">
   <DataContextMoniker Name="/DesiderataDataContext" />
   <nestedChildShapes>
-    <classShape Id="17f99d9c-b2ae-4eb9-b232-802aed011fe5" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+    <classShape Id="7e6a8e8f-62cc-49ec-8a47-ea64eaab875e" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
       <DataClassMoniker Name="/DesiderataDataContext/Collection" />
       <nestedChildShapes>
-        <elementListCompartment Id="227272b5-b7c2-4b3a-8321-921ff16651c3" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9c3c66a9-1a5c-47a6-8e4a-e520abc1d2ba" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bba08fc9-c4ce-4f3f-8a38-00d99181ca7e" absoluteBounds="3.75, 0.75, 2, 1.9631982421875">
+    <classShape Id="2e280c34-008b-4731-9a1f-87264b357a87" absoluteBounds="3.75, 0.75, 2, 1.9631982421875">
       <DataClassMoniker Name="/DesiderataDataContext/Desideratum" />
       <nestedChildShapes>
-        <elementListCompartment Id="26a9d124-e0c2-46be-b71c-5fe9306b69ba" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5e01a38b-fc78-4521-899c-2b813d068f02" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="53a9d388-2ef2-4776-a9ad-987821ef6406" absoluteBounds="4.125, 3.5, 2, 1.5785953776041666">
+    <classShape Id="7d7b77de-532c-4489-96c8-4068d905aeb8" absoluteBounds="0.75, 3.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DesiderataDataContext/Schema" />
       <nestedChildShapes>
-        <elementListCompartment Id="f6b9510d-f56a-4ba3-9a75-b1d1218ca46d" absoluteBounds="4.14, 3.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9e0055b2-105d-4679-b082-ef0f13e5f8a8" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
