@@ -1,0 +1,9 @@
+{
+  "name": "dsnode",
+  "version": "0.0.0",
+  "description": "dsnode",
+  "main": "server.js",
+  "author": {
+    "name": "paul"
+  }
+}
